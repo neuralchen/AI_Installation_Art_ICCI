@@ -11,6 +11,6 @@ Artificial Intelligence Installation Art Official Course Page of ICCI SJTU
 
 - 直接上微软官网下载[vscode](https://code.visualstudio.com/docs/?dv=osx)
 
-### putty
+### putty:
 
 - Windows操作系统 [百度云盘(1.6MB)](https://pan.baidu.com/s/1PLshdwW4WLV8HLf6cRgvaw?pwd=sjtu)
