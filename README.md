@@ -65,7 +65,6 @@ while True:
         print("Object detected!")
     time.sleep(0.2) # 以每秒5次的频率检测，
                     # 也就是5Hz检测频率
-
 ```
 
 ***随堂练习***
