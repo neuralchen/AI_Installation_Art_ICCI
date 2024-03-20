@@ -25,11 +25,59 @@ ssh aiart@192.168.1.xxx
 
 ***ip地址在课堂上即时获取***
 
-### 树莓派IO接口
+## 作业提交
+
+作业提交网址（jbox）：[jbox](https://jbox.sjtu.edu.cn/l/m1pRBu)   
+
+## 树莓派IO接口
 
 ![io](./docs/io.png)
 
-### 实验一--人体动作检测传感器：
+
+## 实验及代码
+### 实验一--红外传感器：
+
+参考代码：
+
+![Photoelectric switch](./docs/hongwai.PNG)
+
+```
+from gpiozero import Button
+import time
+
+switch = Button(17)
+
+while True:
+    if switch.is_pressed:
+        pass
+    else:
+        print("Object detected!")
+    time.sleep(0.2) # 以每秒5次的频率检测，
+                    # 也就是5Hz检测频率
+
+```
+
+***随堂练习***
+
+```
+from gpiozero import Button
+import time
+
+switch = Button(17)
+
+while True:
+    if switch.is_pressed:
+        pass
+    else:
+        count = count + 1
+        if count == 10:
+            print("Object was detected {} times".format(count))
+            count = 0
+    time.sleep(0.2) # 以每秒5次的频率检测，
+                    # 也就是5Hz检测频率
+```
+
+### 实验二--人体动作检测传感器：
 
 传感器实物图：
 
@@ -39,66 +87,92 @@ ssh aiart@192.168.1.xxx
 
 ```
 from gpiozero import MotionSensor
-from signal import pause
+import time
 
-def motion_func():
-      print(“Motion detected!”) 
+pir = MotionSensor(14)
 
-def no_motion_func():
-      print(“Waiting for motion!”) 
-
-
-pir = MotionSensor(17)
-
-pir.when_motion = motion_func pir.when_no_motion = no_motion_func
-pause()
-
-```
-
-### 实验二--红外传感器：
-
-参考代码：
-
-![Photoelectric switch](./docs/hongwai.PNG)
+while True:
+    if pir.motion_detected:
+        # 获得当前时间的格式化字符串
+        time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        print("{}, motion detected!".format(time_str))
+    else:
+        pass
+    time.sleep(0.2) # 以每秒5次的频率检测，
+                    # 也就是5Hz检测频率
 
 ```
-from gpiozero import Button
-from signal import pause
-switch = Button(16)
-
-def capture_on():
-    print("On")
-
-def capture_off():
-    print("Off")
-
-switch.when_pressed = capture_on
-switch.when_released = capture_off
-pause()
-
-```
-
 
 ### 实验三：雨滴传感器
 
-![motion sensor](./docs/motionsensor.PNG)
+传感器实物图：
+
+![water sensor](./docs/motionsensor.PNG)
 
 ```
 from gpiozero import Button
-from signal import pause
-rain_sensor = Button(16)
+import time
+switch = Button(26)
 
-def capture_on():
-    print("Water detected!")
-
-def capture_off():
-    print("No water!")
-
-rain_sensor.when_pressed = capture_on
-rain_sensor.when_released = capture_off
-pause()
+while True:
+    if switch.is_pressed:
+        time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        print("{}, water detected!".format(time_str))
+    else:
+        pass
+    time.sleep(0.2) # 以每秒5次的频率检测，
+                    # 也就是5Hz检测频率
 
 ```
 
-## 实验四：声音传感器：
+***随堂练习***
 
+```
+from gpiozero import Button
+import time
+switch = Button(26)
+
+count  = 0
+
+total_count = int(5 / 0.2) # 将5秒换算成检测到的次数
+
+while True:
+    if switch.is_pressed:
+        count = count + 1
+        if count >= total_count:
+            print("The object was immersed in water for more than 5 seconds!")
+            count = 0 # 计数置零，从头计数
+    else:
+        count = 0 # 一旦期间有一次被检测到没有泡在水里直接置零
+    time.sleep(0.2) # 以每秒5次的频率检测，
+                    # 也就是5Hz检测频率
+```
+
+## 实验四：超声波传感器：
+
+传感器实物图：
+
+![radar](./docs/radar.PNG)
+
+```
+from gpiozero import DistanceSensor
+from time import sleep
+sensor = DistanceSensor(echo=23, trigger=24)
+
+while True:
+    print('Distance to nearest object is', sensor.distance, 'm')
+    sleep(1)
+```
+
+***随堂练习***
+
+```
+from gpiozero import DistanceSensor
+from time import sleep
+sensor = DistanceSensor(echo=23, trigger=24)
+
+while True:
+    if sensor.distance <= 0.1:
+        print("Alert: The object is less than 10cm away from us")
+    sleep(1)
+```
