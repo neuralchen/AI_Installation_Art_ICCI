@@ -14,3 +14,7 @@ Artificial Intelligence Installation Art Official Course Page of ICCI SJTU
 ### putty:
 
 - Windows操作系统 [百度云盘(1.6MB)](https://pan.baidu.com/s/1PLshdwW4WLV8HLf6cRgvaw?pwd=sjtu)
+
+## 实验
+
+### 实验一：人体动作传感器
