@@ -19,8 +19,19 @@ Artificial Intelligence Installation Art Official Course Page of ICCI SJTU
 
 ## SSH连接树莓派：
 
+***绿色(8C:42)***:
 ```
-ssh aiart@192.168.1.xxx
+ssh aiart@192.168.31.203
+```
+
+***蓝色(5A:F5)***:
+```
+ssh aiart@192.168.31.98
+```
+
+***粉红色(8C:C2)***:
+```
+ssh aiart@192.168.31.81
 ```
 
 ***ip地址在课堂上即时获取***
